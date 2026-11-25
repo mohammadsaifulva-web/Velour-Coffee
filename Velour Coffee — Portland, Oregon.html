@@ -1,0 +1,1268 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Velour Coffee — Portland, Oregon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap">
+<style>
+/* ═══════════════════════════════
+   TOKENS
+═══════════════════════════════ */
+:root{
+  --bg:#0f0d0a;
+  --bg2:#181410;
+  --bg3:#221d16;
+  --bg4:#2d261d;
+  --cream:#f5ede0;
+  --cream2:#e8d9c4;
+  --cream3:#c8b89a;
+  --brown:#8b5e3c;
+  --brown2:#a3714a;
+  --amber:#d4860e;
+  --amber2:#f0a830;
+  --green:#2d4a3e;
+  --green2:#3d6b5a;
+  --border:rgba(212,134,14,.12);
+  --border2:rgba(212,134,14,.07);
+  --dis:'Playfair Display',Georgia,serif;
+  --body:'DM Sans',system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--cream);font-family:var(--body);font-weight:300;overflow-x:hidden;line-height:1.6}
+img{display:block;max-width:100%;object-fit:cover}
+a{color:inherit;text-decoration:none}
+button,input,textarea,select{font-family:var(--body)}
+
+/* ═══════════════════════════════
+   SCROLL & UTILS
+═══════════════════════════════ */
+#prog{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--brown),var(--amber),var(--amber2));z-index:300;transition:width .05s}
+#btt{position:fixed;bottom:2rem;right:2rem;width:46px;height:46px;background:var(--amber);color:var(--bg);border:none;font-size:1.1rem;cursor:pointer;opacity:0;pointer-events:none;transition:.3s;z-index:50;display:flex;align-items:center;justify-content:center}
+#btt.show{opacity:1;pointer-events:all}
+#btt:hover{background:var(--amber2);transform:translateY(-3px)}
+
+/* ═══════════════════════════════
+   PRELOADER
+═══════════════════════════════ */
+#loader{position:fixed;inset:0;background:var(--bg);z-index:999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;transition:opacity .9s .3s,visibility .9s .3s}
+#loader.gone{opacity:0;visibility:hidden}
+.ld-cup{font-size:3rem;animation:steam 1.5s ease-in-out infinite}
+@keyframes steam{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-8px) rotate(3deg)}}
+.ld-name{font-family:var(--dis);font-size:1.8rem;color:var(--amber);letter-spacing:.2em;font-weight:400}
+.ld-bar{width:180px;height:2px;background:var(--border);overflow:hidden;border-radius:1px}
+.ld-bar::after{content:'';display:block;height:100%;background:linear-gradient(90deg,var(--brown),var(--amber));animation:ldp 1.4s ease forwards}
+@keyframes ldp{from{width:0}to{width:100%}}
+
+/* ═══════════════════════════════
+   MARQUEE
+═══════════════════════════════ */
+.mq-wrap{background:var(--amber);overflow:hidden;padding:.45rem 0}
+.mq-track{display:flex;white-space:nowrap;animation:mq 25s linear infinite}
+.mq-track span{padding:0 2rem;font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;color:var(--bg);font-weight:600}
+.mq-track .sep{padding:0;opacity:.4;font-size:.5rem}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ═══════════════════════════════
+   NAV
+═══════════════════════════════ */
+header{position:sticky;top:0;z-index:90;transition:.4s}
+header.sc{background:rgba(15,13,10,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border2);box-shadow:0 4px 32px rgba(0,0,0,.5)}
+.nav-w{max-width:1360px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:1.3rem 2.5rem;gap:2rem}
+.logo{display:flex;align-items:center;gap:.7rem}
+.logo-cup{font-size:1.5rem}
+.logo-text{font-family:var(--dis);font-size:1.4rem;font-weight:400;color:var(--amber);letter-spacing:.08em;line-height:1}
+.logo-text small{display:block;font-family:var(--body);font-size:.45rem;letter-spacing:.4em;text-transform:uppercase;color:var(--cream3);font-weight:400;margin-top:2px}
+nav{display:flex;gap:2.2rem}
+nav a{font-size:.65rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--cream3);transition:.2s;position:relative;padding-bottom:3px}
+nav a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--amber);transition:.3s}
+nav a:hover{color:var(--amber)}
+nav a:hover::after{width:100%}
+.nav-cta{background:var(--amber);color:var(--bg);border:none;padding:.6rem 1.6rem;font-size:.62rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:.25s;white-space:nowrap}
+.nav-cta:hover{background:var(--amber2)}
+.ham{display:none;flex-direction:column;gap:5px;padding:4px;cursor:pointer}
+.ham span{width:22px;height:1px;background:var(--cream3);display:block;transition:.3s}
+
+/* ═══════════════════════════════
+   MOB NAV
+═══════════════════════════════ */
+.mob{position:fixed;inset:0;background:var(--bg);z-index:85;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;transform:translateX(100%);transition:transform .5s cubic-bezier(.77,0,.18,1)}
+.mob.open{transform:none}
+.mob a{font-family:var(--dis);font-size:2.8rem;font-weight:300;color:var(--cream3);transition:.2s}
+.mob a:hover{color:var(--amber)}
+#mobX{position:absolute;top:1.8rem;right:2rem;background:none;border:none;font-size:1.3rem;color:var(--cream3);cursor:pointer;transition:.2s}
+#mobX:hover{color:var(--amber)}
+
+/* ═══════════════════════════════
+   SECTION UTILS
+═══════════════════════════════ */
+.sec{padding:8rem 2.5rem}
+.inn{max-width:1360px;margin:0 auto}
+.ey{font-size:.58rem;letter-spacing:.5em;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:.9rem}
+.h2{font-family:var(--dis);font-size:clamp(2.4rem,4.5vw,4rem);font-weight:400;line-height:1.08;color:var(--cream)}
+.h2 em{font-style:italic;color:var(--amber2)}
+.aline{width:40px;height:2px;background:linear-gradient(90deg,var(--brown),var(--amber));margin:1rem 0}
+.aline.c{margin-inline:auto}
+.sub{color:var(--cream3);line-height:1.95;font-size:.9rem;max-width:520px}
+.btn-amber{background:var(--amber);color:var(--bg);border:none;padding:.9rem 2.4rem;font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:.25s;display:inline-block}
+.btn-amber:hover{background:var(--amber2);transform:translateY(-2px);box-shadow:0 8px 28px rgba(212,134,14,.3)}
+.btn-out{background:transparent;border:1px solid var(--amber);color:var(--amber);padding:.9rem 2.4rem;font-size:.7rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:.25s;display:inline-block}
+.btn-out:hover{background:var(--amber);color:var(--bg)}
+
+/* ═══════════════════════════════
+   REVEAL
+═══════════════════════════════ */
+.rv{opacity:0;transform:translateY(30px);transition:opacity .9s,transform .9s}
+.rv.vis{opacity:1;transform:none}
+.rl{opacity:0;transform:translateX(-30px);transition:opacity .9s,transform .9s}
+.rl.vis{opacity:1;transform:none}
+.rr{opacity:0;transform:translateX(30px);transition:opacity .9s,transform .9s}
+.rr.vis{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv,.rl,.rr{transition:none;opacity:1;transform:none}}
+
+/* ═══════════════════════════════
+   PAGE 1 — HERO
+═══════════════════════════════ */
+.hero{position:relative;height:100vh;min-height:650px;overflow:hidden;background:#080604}
+.hero-slides{position:absolute;inset:0}
+.slide{position:absolute;inset:0;opacity:0;background-size:cover;background-position:center;transition:opacity 2.5s}
+.slide.on{opacity:1;animation:kbz 14s linear forwards}
+@keyframes kbz{from{transform:scale(1.08)}to{transform:scale(1)}}
+.hero-ov{position:absolute;inset:0;background:linear-gradient(165deg,rgba(0,0,0,.05) 0%,rgba(15,13,10,.75) 50%,rgba(15,13,10,.97) 100%)}
+.hero-c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 2rem;z-index:2}
+.h-eye{font-size:.58rem;letter-spacing:.55em;text-transform:uppercase;color:var(--amber);margin-bottom:2rem;opacity:0;animation:fu .9s .4s forwards}
+.h-h1{font-family:var(--dis);font-size:clamp(3.5rem,9vw,8.5rem);font-weight:400;line-height:1;color:#fff;margin-bottom:1.5rem;opacity:0;animation:fu 1s .6s forwards}
+.h-h1 em{font-style:italic;color:var(--amber2);display:block;font-size:.7em}
+.h-p{font-size:1rem;color:rgba(255,255,255,.5);max-width:460px;line-height:1.9;margin-bottom:3rem;opacity:0;animation:fu .9s .8s forwards}
+.h-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;opacity:0;animation:fu .9s 1s forwards}
+.hero-scroll{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.5rem;z-index:3;animation:bob 2.5s ease-in-out infinite}
+.hero-scroll .ln{width:1px;height:48px;background:linear-gradient(to bottom,transparent,rgba(212,134,14,.5))}
+.hero-scroll p{font-size:.5rem;letter-spacing:.4em;text-transform:uppercase;color:rgba(255,255,255,.2)}
+.hero-dots{position:absolute;bottom:2.5rem;right:2.5rem;display:flex;gap:.5rem;z-index:3}
+.hd{width:28px;height:2px;background:rgba(255,255,255,.18);cursor:pointer;transition:.3s}
+.hd.on{background:var(--amber);width:44px}
+/* hero badges */
+.hero-badges{position:absolute;bottom:3rem;left:2.5rem;z-index:3;display:flex;flex-direction:column;gap:.6rem}
+.hbadge{background:rgba(15,13,10,.75);backdrop-filter:blur(10px);border:1px solid var(--border);padding:.6rem 1rem;display:flex;align-items:center;gap:.6rem}
+.hbadge-ic{font-size:1.1rem}
+.hbadge-t{font-size:.62rem;color:var(--cream3);letter-spacing:.08em}
+.hbadge-t strong{color:var(--amber);display:block;font-size:.75rem}
+@keyframes fu{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(9px)}}
+
+/* ═══════════════════════════════
+   PAGE 1 — INTRO STRIP
+═══════════════════════════════ */
+.intro-strip{background:var(--bg2);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2)}
+.intro-grid{max-width:1360px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.intro-item{padding:3rem 2rem;text-align:center;border-right:1px solid var(--border2);transition:.3s}
+.intro-item:last-child{border-right:none}
+.intro-item:hover{background:var(--bg3)}
+.ii-ic{font-size:2rem;margin-bottom:.8rem}
+.ii-name{font-family:var(--dis);font-size:1.1rem;font-weight:400;color:var(--cream);margin-bottom:.3rem}
+.ii-desc{font-size:.78rem;color:var(--cream3);line-height:1.6}
+
+/* ═══════════════════════════════
+   PAGE 1 — ABOUT PREVIEW
+═══════════════════════════════ */
+.about-bg{background:var(--bg)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:7rem;align-items:center}
+.about-imgs{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.about-imgs img{width:100%}
+.about-imgs img:first-child{grid-row:span 2;height:100%}
+.about-quote{background:var(--bg3);border-left:3px solid var(--amber);padding:1.8rem;margin:2rem 0;font-family:var(--dis);font-size:1.2rem;font-style:italic;color:var(--cream2);line-height:1.6}
+.about-quote cite{display:block;font-family:var(--body);font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--amber);font-style:normal;margin-top:.8rem}
+
+/* ═══════════════════════════════
+   PAGE 2 — MENU
+═══════════════════════════════ */
+.menu-bg{background:var(--bg2)}
+.menu-tabs{display:flex;gap:0;border-bottom:1px solid var(--border2);margin-bottom:3.5rem;flex-wrap:wrap}
+.mtab{padding:.85rem 2rem;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream3);background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer;transition:.25s}
+.mtab.on{color:var(--amber);border-bottom-color:var(--amber)}
+.mtab:hover{color:var(--cream)}
+.menu-pane{display:none}
+.menu-pane.on{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.mc{background:var(--bg3);border:1px solid var(--border2);overflow:hidden;cursor:pointer;transition:.4s}
+.mc:hover{border-color:var(--border);transform:translateY(-4px);box-shadow:0 20px 48px rgba(0,0,0,.4)}
+.mc-img{aspect-ratio:4/3;overflow:hidden;position:relative}
+.mc-img img{width:100%;height:100%;transition:transform .7s}
+.mc:hover .mc-img img{transform:scale(1.08)}
+.mc-tag{position:absolute;top:.8rem;left:.8rem;background:var(--amber);color:var(--bg);padding:.2rem .6rem;font-size:.52rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700}
+.mc-body{padding:1.5rem}
+.mc-cat{font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--amber);margin-bottom:.3rem}
+.mc-name{font-family:var(--dis);font-size:1.3rem;font-weight:400;color:var(--cream);margin-bottom:.4rem}
+.mc-desc{font-size:.78rem;color:var(--cream3);line-height:1.7;margin-bottom:1rem}
+.mc-foot{display:flex;justify-content:space-between;align-items:center;padding-top:1rem;border-top:1px solid var(--border2)}
+.mc-price{font-family:var(--dis);font-size:1.4rem;color:var(--amber)}
+.mc-add{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);font-weight:600;transition:.2s}
+.mc-add:hover{letter-spacing:.25em}
+
+/* MENU MODAL */
+#mModal{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:500;display:none;align-items:center;justify-content:center;padding:1.5rem}
+#mModal.on{display:flex}
+.mm-box{background:var(--bg3);border:1px solid var(--border);max-width:700px;width:100%;max-height:90vh;overflow-y:auto;position:relative;animation:mmIn .35s cubic-bezier(.22,1,.36,1)}
+@keyframes mmIn{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+.mm-img{width:100%;height:280px;object-fit:cover}
+.mm-body{padding:2.5rem}
+.mm-tag{display:inline-block;background:var(--amber);color:var(--bg);padding:.2rem .7rem;font-size:.52rem;letter-spacing:.2em;text-transform:uppercase;font-weight:700;margin-bottom:1rem}
+.mm-cat{font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--amber);margin-bottom:.3rem}
+.mm-name{font-family:var(--dis);font-size:2rem;font-weight:400;color:var(--cream);margin-bottom:.6rem}
+.mm-desc{font-size:.9rem;color:var(--cream3);line-height:1.9;margin-bottom:1.5rem}
+.mm-metas{display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem}
+.mm-meta{background:var(--bg2);border:1px solid var(--border2);padding:.5rem 1rem;font-size:.75rem;color:var(--cream3)}
+.mm-meta strong{color:var(--amber);display:block;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.2rem}
+.mm-price-row{display:flex;align-items:center;justify-content:space-between;padding-top:1.5rem;border-top:1px solid var(--border2)}
+.mm-price{font-family:var(--dis);font-size:2.2rem;color:var(--amber)}
+.mm-close{position:absolute;top:1rem;right:1rem;background:rgba(0,0,0,.5);border:none;color:#fff;width:36px;height:36px;font-size:1.1rem;cursor:pointer;transition:.2s;display:flex;align-items:center;justify-content:center}
+.mm-close:hover{background:var(--amber);color:var(--bg)}
+
+/* ARABIC TOGGLE */
+.lang-btn{position:fixed;bottom:5rem;right:2rem;z-index:60;background:var(--bg3);border:1px solid var(--border);color:var(--amber);padding:.5rem 1rem;font-size:.65rem;font-weight:600;letter-spacing:.15em;cursor:pointer;transition:.25s}
+.lang-btn:hover{background:var(--amber);color:var(--bg)}
+[dir="rtl"] body{font-family:'Noto Sans Arabic',var(--body)}
+[dir="rtl"] .nav-w,[dir="rtl"] .inn,[dir="rtl"] .ft{direction:rtl}
+[dir="rtl"] .aline{margin-right:0;margin-left:auto}
+[dir="rtl"] .aline.c{margin-inline:auto}
+[dir="rtl"] .timeline{padding-left:0;padding-right:3rem}
+[dir="rtl"] .timeline::before{left:auto;right:.7rem}
+[dir="rtl"] .tl-dot{left:auto;right:-2.3rem}
+[dir="rtl"] .tl-year,[dir="rtl"] .tl-title,[dir="rtl"] .tl-desc{text-align:right}
+[dir="rtl"] .about-quote{border-left:none;border-right:3px solid var(--amber)}
+[dir="rtl"] .mm-close{right:auto;left:1rem}
+
+/* ═══════════════════════════════
+   PAGE 2 — ORIGINS
+═══════════════════════════════ */
+.origins-bg{background:var(--bg)}
+.origins-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:4rem}
+.origin-card{position:relative;overflow:hidden;cursor:pointer}
+.origin-card img{width:100%;aspect-ratio:3/4;transition:transform .7s}
+.origin-card:hover img{transform:scale(1.06)}
+.origin-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(15,13,10,.95) 0%,rgba(15,13,10,.2) 60%,transparent 100%);display:flex;flex-direction:column;justify-content:flex-end;padding:2rem}
+.origin-flag{font-size:1.5rem;margin-bottom:.5rem}
+.origin-country{font-family:var(--dis);font-size:1.6rem;font-weight:400;color:#fff;margin-bottom:.2rem}
+.origin-alt{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber)}
+.origin-desc{font-size:.78rem;color:rgba(255,255,255,.55);margin-top:.5rem;line-height:1.6;max-height:0;overflow:hidden;transition:max-height .4s}
+.origin-card:hover .origin-desc{max-height:80px}
+
+/* ═══════════════════════════════
+   PAGE 3 — EXPERIENCE / ATMOSPHERE
+═══════════════════════════════ */
+.atm-bg{background:var(--bg3)}
+.atm-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:7rem;align-items:center}
+.atm-imgs{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto;gap:8px}
+.atm-img-big{grid-column:span 2;overflow:hidden}
+.atm-img-big img{width:100%;height:300px}
+.atm-img-sm{overflow:hidden}
+.atm-img-sm img{width:100%;height:200px}
+.atm-feats{display:flex;flex-direction:column;gap:.8rem;margin:2rem 0}
+.atf{display:flex;align-items:center;gap:1rem;padding:.9rem 1.2rem;background:var(--bg2);border:1px solid var(--border2);transition:.25s}
+.atf:hover{border-color:var(--border);background:var(--bg4)}
+.atf-ic{font-size:1.3rem;flex-shrink:0}
+.atf-t{font-weight:500;font-size:.85rem;color:var(--cream);margin-bottom:.1rem}
+.atf-d{font-size:.75rem;color:var(--cream3)}
+
+/* ═══════════════════════════════
+   PAGE 3 — GALLERY (masonry)
+═══════════════════════════════ */
+.gallery-bg{background:var(--bg)}
+.g-filter{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:center;margin-bottom:3rem}
+.gfb{padding:.45rem 1.4rem;border:1px solid var(--border);background:transparent;color:var(--cream3);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:.25s;font-family:var(--body)}
+.gfb.on,.gfb:hover{background:var(--amber);border-color:var(--amber);color:var(--bg)}
+.g-masonry{columns:3;gap:8px}
+.g-tile{break-inside:avoid;margin-bottom:8px;position:relative;overflow:hidden;cursor:pointer}
+.g-tile img{width:100%;display:block;transition:transform .6s}
+.g-tile:hover img{transform:scale(1.06)}
+.g-ov{position:absolute;inset:0;background:rgba(15,13,10,.75);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transition:.3s}
+.g-tile:hover .g-ov{opacity:1}
+.g-ov-t{font-family:var(--dis);font-size:1.1rem;font-style:italic;color:#fff}
+.g-ov-c{font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:var(--amber);margin-top:.3rem}
+
+/* lightbox */
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.97);z-index:999;display:none;align-items:center;justify-content:center}
+#lb.on{display:flex}
+#lb img{max-width:90vw;max-height:85vh;object-fit:contain}
+#lbX{position:absolute;top:1.5rem;right:2rem;color:#fff;font-size:1.8rem;background:none;border:none;cursor:pointer;opacity:.4;transition:.2s}
+#lbX:hover{opacity:1;color:var(--amber)}
+#lbP,#lbN{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.07);border:none;color:#fff;font-size:1.5rem;padding:1rem;cursor:pointer;transition:.2s}
+#lbP{left:1rem}#lbN{right:1rem}
+#lbP:hover,#lbN:hover{background:var(--amber);color:var(--bg)}
+#lbCap{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);font-family:var(--dis);font-size:1rem;color:#fff;font-style:italic;opacity:.5}
+
+/* ═══════════════════════════════
+   PAGE 4 — OUR STORY
+═══════════════════════════════ */
+.story-bg{background:var(--bg2)}
+.story-hero{position:relative;height:55vh;min-height:400px;overflow:hidden;margin-bottom:6rem}
+.story-hero img{width:100%;height:100%}
+.story-hero-ov{position:absolute;inset:0;background:rgba(15,13,10,.7);display:flex;align-items:center;justify-content:center;text-align:center}
+.story-hero-ov h2{font-family:var(--dis);font-size:clamp(3rem,6vw,6rem);font-weight:300;color:#fff;line-height:1.1}
+.story-hero-ov h2 em{color:var(--amber2);font-style:italic}
+.timeline{display:flex;flex-direction:column;gap:0;position:relative;padding-left:3rem;margin:4rem 0}
+.timeline::before{content:'';position:absolute;left:.7rem;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--amber),transparent)}
+.tl-item{position:relative;padding-bottom:3.5rem}
+.tl-dot{position:absolute;left:-2.3rem;top:.2rem;width:14px;height:14px;border-radius:50%;background:var(--amber);border:3px solid var(--bg2)}
+.tl-year{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--amber);margin-bottom:.3rem}
+.tl-title{font-family:var(--dis);font-size:1.4rem;font-weight:400;color:var(--cream);margin-bottom:.4rem}
+.tl-desc{font-size:.85rem;color:var(--cream3);line-height:1.8;max-width:560px}
+.team-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:4rem}
+.team-card{text-align:center}
+.team-img{aspect-ratio:3/4;overflow:hidden;margin-bottom:1rem}
+.team-img img{width:100%;height:100%;transition:transform .6s}
+.team-card:hover .team-img img{transform:scale(1.05)}
+.team-name{font-family:var(--dis);font-size:1.1rem;font-weight:400;color:var(--cream);margin-bottom:.2rem}
+.team-role{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber)}
+.team-bio{font-size:.78rem;color:var(--cream3);margin-top:.5rem;line-height:1.6}
+
+/* ═══════════════════════════════
+   PAGE 5 — VISIT US
+═══════════════════════════════ */
+.visit-bg{background:var(--bg)}
+.visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.hours-table{width:100%;border-collapse:collapse;margin-top:1.5rem}
+.hours-table tr{border-bottom:1px solid var(--border2)}
+.hours-table td{padding:.9rem .5rem;font-size:.85rem}
+.hours-table td:first-child{color:var(--cream3)}
+.hours-table td:last-child{color:var(--cream);font-weight:500;text-align:right}
+.hours-table tr.today td{color:var(--amber)}
+.map-box{background:var(--bg3);border:1px solid var(--border2);overflow:hidden}
+.map-img{width:100%;height:280px}
+.map-info{padding:2rem}
+.loc-items{display:flex;flex-direction:column;gap:1.2rem;margin-top:1.5rem}
+.loc-item{display:flex;align-items:flex-start;gap:1rem}
+.loc-ic{width:36px;height:36px;background:rgba(212,134,14,.1);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+.loc-lbl{font-size:.57rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:.2rem}
+.loc-val{font-size:.85rem;color:var(--cream3);line-height:1.6}
+/* events */
+.events-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:4rem}
+.ev-card{background:var(--bg2);border:1px solid var(--border2);overflow:hidden;transition:.3s}
+.ev-card:hover{border-color:var(--border);transform:translateY(-3px)}
+.ev-img{aspect-ratio:16/9;overflow:hidden}
+.ev-img img{width:100%;height:100%;transition:transform .6s}
+.ev-card:hover .ev-img img{transform:scale(1.06)}
+.ev-body{padding:1.5rem}
+.ev-date{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);margin-bottom:.4rem}
+.ev-name{font-family:var(--dis);font-size:1.2rem;font-weight:400;color:var(--cream);margin-bottom:.4rem}
+.ev-desc{font-size:.78rem;color:var(--cream3);line-height:1.7}
+
+/* ═══════════════════════════════
+   PAGE 5 — REVIEWS
+═══════════════════════════════ */
+.rev-bg{background:var(--bg3)}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:4rem;grid-auto-rows:1fr}
+.rev-card{background:var(--bg2);border:1px solid var(--border2);padding:2.2rem;transition:.35s;position:relative}
+.rev-card:hover{border-color:var(--border);transform:translateY(-4px)}
+.rev-qs{position:absolute;top:1.2rem;right:1.5rem;font-size:3rem;font-family:var(--dis);color:var(--amber);opacity:.2;line-height:1}
+.rev-stars{color:var(--amber);letter-spacing:.08em;margin-bottom:1rem;font-size:.9rem}
+.rev-text{font-family:var(--dis);font-size:1.05rem;font-style:italic;font-weight:300;color:var(--cream3);line-height:1.82;margin-bottom:1.5rem;padding-left:1rem;border-left:2px solid var(--border)}
+.rev-auth{display:flex;align-items:center;gap:.9rem}
+.rev-av{width:42px;height:42px;border-radius:50%;overflow:hidden;border:1px solid var(--border);flex-shrink:0}
+.rev-av img{width:100%;height:100%}
+.rev-name{font-weight:500;font-size:.85rem;color:var(--cream)}
+.rev-src{font-size:.68rem;color:var(--cream3)}
+
+/* ═══════════════════════════════
+   PAGE 6 — CONTACT
+═══════════════════════════════ */
+.contact-bg{background:var(--bg)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start}
+.fg{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.3rem}
+.fl{font-size:.57rem;letter-spacing:.22em;text-transform:uppercase;color:var(--amber)}
+.fi{background:var(--bg2);border:1px solid var(--border2);color:var(--cream);font-size:.9rem;font-weight:300;padding:.8rem 1.1rem;outline:none;transition:.2s}
+.fi::placeholder{color:var(--cream3)}
+.fi:focus{border-color:var(--amber)}
+.f-row2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.fta{resize:vertical;min-height:120px}
+.fsub{width:100%;background:var(--amber);color:var(--bg);border:none;padding:1.1rem;font-size:.7rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;cursor:pointer;transition:.25s}
+.fsub:hover{background:var(--amber2)}
+.f-ok{display:none;text-align:center;padding:3.5rem 1rem;color:var(--cream3);font-family:var(--dis);font-size:1.4rem;font-style:italic}
+/* newsletter */
+.nl-bg{background:var(--amber);padding:5rem 2.5rem;text-align:center}
+.nl-h{font-family:var(--dis);font-size:clamp(2rem,4vw,3.5rem);color:var(--bg);font-weight:400;margin-bottom:.8rem}
+.nl-p{font-size:.9rem;color:rgba(15,13,10,.65);max-width:420px;margin:0 auto 2rem;line-height:1.8}
+.nl-form{display:flex;gap:0;max-width:480px;margin:0 auto;flex-wrap:wrap}
+.nl-input{flex:1;min-width:200px;padding:1rem 1.4rem;background:rgba(255,255,255,.25);border:none;font-family:var(--body);font-size:.9rem;color:var(--bg);outline:none}
+.nl-input::placeholder{color:rgba(15,13,10,.5)}
+.nl-btn{background:var(--bg);color:var(--amber);border:none;padding:1rem 2rem;font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:.25s;white-space:nowrap}
+.nl-btn:hover{background:var(--bg2)}
+
+/* ═══════════════════════════════
+   CTA SECTION
+═══════════════════════════════ */
+.cta-sec{position:relative;overflow:hidden;padding:9rem 2.5rem;text-align:center}
+.cta-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:brightness(.25)}
+.cta-in{position:relative;z-index:1}
+.cta-h{font-family:var(--dis);font-size:clamp(2.5rem,5.5vw,5.5rem);color:#fff;font-weight:300;line-height:1.1;margin-bottom:1rem}
+.cta-h em{font-style:italic;color:var(--amber2)}
+.cta-p{font-size:.95rem;color:rgba(255,255,255,.45);max-width:420px;margin:0 auto 2.5rem;line-height:1.9}
+
+/* ═══════════════════════════════
+   STATS STRIP
+═══════════════════════════════ */
+.stats-bg{background:var(--bg3);border-top:1px solid var(--border2);border-bottom:1px solid var(--border2)}
+.stats-grid{max-width:1360px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
+.st{padding:3.5rem 1rem;text-align:center;border-right:1px solid var(--border2)}
+.st:last-child{border-right:none}
+.stn{font-family:var(--dis);font-size:3.5rem;font-weight:300;color:var(--amber);line-height:1;display:block}
+.stl{font-size:.57rem;letter-spacing:.25em;text-transform:uppercase;color:var(--cream3);margin-top:.5rem}
+
+/* ═══════════════════════════════
+   FOOTER
+═══════════════════════════════ */
+footer{background:var(--bg2);border-top:1px solid var(--border2);padding:5rem 2.5rem 0}
+.ft{max-width:1360px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3.5rem;padding-bottom:4rem;border-bottom:1px solid var(--border2)}
+.f-logo-wrap{display:flex;align-items:center;gap:.7rem;margin-bottom:1rem}
+.f-logo-name{font-family:var(--dis);font-size:1.3rem;color:var(--amber);letter-spacing:.08em}
+.f-desc{font-size:.82rem;color:var(--cream3);line-height:1.9;max-width:240px}
+.f-socs{display:flex;gap:.5rem;margin-top:1.6rem}
+.fsoc{width:34px;height:34px;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--cream3);transition:.2s}
+.fsoc:hover{border-color:var(--amber);color:var(--amber)}
+.fc-t{font-size:.57rem;letter-spacing:.3em;text-transform:uppercase;color:var(--cream);margin-bottom:1.2rem}
+.fc-ul{list-style:none;display:flex;flex-direction:column;gap:.65rem}
+.fc-ul a{font-size:.82rem;color:var(--cream3);transition:.2s}
+.fc-ul a:hover{color:var(--amber)}
+.fb{max-width:1360px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;padding:1.5rem 0;font-size:.67rem;letter-spacing:.08em;color:var(--cream3)}
+
+/* ═══════════════════════════════
+   RESPONSIVE
+═══════════════════════════════ */
+@media(max-width:1100px){
+  .about-grid,.atm-grid,.visit-grid,.contact-grid{grid-template-columns:1fr;gap:4rem}
+  .menu-pane.on{grid-template-columns:1fr 1fr}
+  .team-grid{grid-template-columns:1fr 1fr}
+  .ft{grid-template-columns:1fr 1fr}
+  .stats-grid{grid-template-columns:repeat(3,1fr)}
+  .st:nth-child(3){border-right:none}
+}
+@media(max-width:768px){
+  nav,.nav-cta{display:none}
+  .ham{display:flex}
+  .intro-grid{grid-template-columns:1fr 1fr}
+  .menu-pane.on,.origins-grid,.events-grid{grid-template-columns:1fr}
+  .rev-grid{grid-template-columns:1fr}
+  .g-masonry{columns:1}
+  .team-grid{grid-template-columns:1fr 1fr}
+  .ft{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr 1fr}
+  .hero-badges,.hero-scroll{display:none}
+  .hero-dots{display:none}
+  .nl-form{flex-direction:column}
+  .mm-box{max-height:85vh}
+  .mm-img{height:200px}
+  .lang-btn{bottom:4rem;right:1rem}
+}
+@media(max-width:480px){
+  .intro-grid,.team-grid,.f-row2{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- PRELOADER -->
+<div id="loader">
+  <div class="ld-cup">☕</div>
+  <p class="ld-name">VELOUR</p>
+  <div class="ld-bar"></div>
+</div>
+
+<!-- SCROLL PROGRESS -->
+<div id="prog"></div>
+<button id="btt" onclick="scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- MOB NAV -->
+<div class="mob" id="mob">
+  <button id="mobX">✕</button>
+  <a href="#home" onclick="cMob()">Home</a>
+  <a href="#menu" onclick="cMob()">Menu</a>
+  <a href="#atmosphere" onclick="cMob()">Experience</a>
+  <a href="#story" onclick="cMob()">Our Story</a>
+  <a href="#visit" onclick="cMob()">Visit Us</a>
+  <a href="#contact" onclick="cMob()">Contact</a>
+</div>
+
+<!-- HEADER -->
+<header id="hdr">
+  <div class="nav-w">
+    <div class="logo">
+      <span class="logo-cup">☕</span>
+      <div class="logo-text">Velour Coffee<small>Portland, Oregon · Est. 2009</small></div>
+    </div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#menu">Menu</a>
+      <a href="#atmosphere">Experience</a>
+      <a href="#story">Our Story</a>
+      <a href="#visit">Visit Us</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Reserve a Table</button>
+    <div class="ham" id="ham"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<!-- MARQUEE -->
+<div class="mq-wrap">
+  <div class="mq-track" id="mqt"></div>
+</div>
+
+<!-- ══════════════════════════════
+     PAGE 1 — HOME
+══════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="hero-slides" id="hSlides">
+    <div class="slide on" style="background-image:url('https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop')"></div>
+    <div class="slide" style="background-image:url('https://images.pexels.com/photos/1251175/pexels-photo-1251175.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop')"></div>
+    <div class="slide" style="background-image:url('https://images.pexels.com/photos/894695/pexels-photo-894695.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop')"></div>
+    <div class="slide" style="background-image:url('https://images.pexels.com/photos/585753/pexels-photo-585753.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&fit=crop')"></div>
+  </div>
+  <div class="hero-ov"></div>
+  <div class="hero-c">
+    <span class="h-eye">Artisan Coffee · Portland, Oregon</span>
+    <h1 class="h-h1">Every Sip<em>Tells a Story</em></h1>
+    <p class="h-p">Carefully sourced. Meticulously roasted. Poured with passion since 2009. Welcome to Portland's most beloved coffee sanctuary.</p>
+    <div class="h-btns">
+      <button class="btn-amber" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">Explore Our Menu</button>
+      <button class="btn-out" onclick="document.getElementById('story').scrollIntoView({behavior:'smooth'})">Our Story</button>
+    </div>
+  </div>
+  <div class="hero-badges">
+    <div class="hbadge"><span class="hbadge-ic">🏆</span><div class="hbadge-t"><strong>Best Coffee Shop</strong>Portland Monthly 2024</div></div>
+    <div class="hbadge"><span class="hbadge-ic">🌱</span><div class="hbadge-t"><strong>100% Organic</strong>Certified Beans</div></div>
+  </div>
+  <div class="hero-scroll"><div class="ln"></div><p>Scroll</p></div>
+  <div class="hero-dots" id="hDots"></div>
+</section>
+
+<!-- INTRO STRIP -->
+<div class="intro-strip">
+  <div class="intro-grid" id="introGrid"></div>
+</div>
+
+<!-- ABOUT PREVIEW -->
+<section class="sec about-bg" id="about">
+  <div class="inn">
+    <div class="about-grid">
+      <div class="rl">
+        <div class="about-imgs">
+          <img src="https://images.pexels.com/photos/1251175/pexels-photo-1251175.jpeg?auto=compress&cs=tinysrgb&w=400&h=600&fit=crop" alt="Barista" loading="lazy">
+          <img src="https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=400&h=290&fit=crop" alt="Coffee" loading="lazy">
+          <img src="https://images.pexels.com/photos/2074122/pexels-photo-2074122.jpeg?auto=compress&cs=tinysrgb&w=400&h=290&fit=crop" alt="Cafe interior" loading="lazy">
+        </div>
+      </div>
+      <div class="rr">
+        <span class="ey">Who We Are</span>
+        <h2 class="h2">More Than Coffee —<br><em>A Community</em></h2>
+        <div class="aline"></div>
+        <p style="color:var(--cream3);line-height:1.95;font-size:.9rem;margin-bottom:1.2rem">Velour Coffee was born from a simple obsession: the perfect cup. Since 2009, we've sourced single-origin beans from Ethiopia, Colombia, Guatemala and Japan — roasted in-house every morning before sunrise.</p>
+        <p style="color:var(--cream3);line-height:1.95;font-size:.9rem;margin-bottom:1.8rem">Our Pearl District café is more than a coffee shop. It's where Portland wakes up, where ideas are born over espresso, and where strangers become regulars.</p>
+        <div class="about-quote">"We don't just brew coffee. We tell the story of the farmer, the soil, the rain, and the hands that picked every single bean."<cite>— Maya Chen, Founder</cite></div>
+        <button class="btn-amber" onclick="document.getElementById('story').scrollIntoView({behavior:'smooth'})">Read Our Full Story →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bg">
+  <div class="stats-grid rv">
+    <div class="st"><span class="stn" data-count="15">0</span><span class="stl">Years of Craft</span></div>
+    <div class="st"><span class="stn" data-count="8">0</span><span class="stl">Bean Origins</span></div>
+    <div class="st"><span class="stn" data-count="340">0</span><span class="stl">Daily Cups Served</span></div>
+    <div class="st"><span class="stn" data-count="4800">0</span><span class="stl">Happy Regulars</span></div>
+    <div class="st"><span class="stn" data-count="12">0</span><span class="stl">Awards Won</span></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     PAGE 2 — MENU
+══════════════════════════════ -->
+<section class="sec menu-bg" id="menu">
+  <div class="inn">
+    <div class="rv" style="text-align:center;margin-bottom:3.5rem">
+      <span class="ey">Our Menu</span>
+      <h2 class="h2">Crafted with <em>Passion</em></h2>
+      <div class="aline c"></div>
+      <p class="sub" style="margin:0 auto;text-align:center">Every item on our menu is made from scratch, daily. No shortcuts. No compromises.</p>
+    </div>
+    <div class="menu-tabs rv" id="mTabs"></div>
+    <div id="mPanes"></div>
+  </div>
+</section>
+
+<!-- ORIGINS -->
+<section class="sec origins-bg" id="origins">
+  <div class="inn">
+    <div class="rv" style="text-align:center;margin-bottom:1rem">
+      <span class="ey">Where It All Begins</span>
+      <h2 class="h2">Our Bean <em>Origins</em></h2>
+      <div class="aline c"></div>
+      <p class="sub" style="margin:0 auto;text-align:center;margin-bottom:0">We travel the world to find beans that move us. Here are three regions closest to our hearts.</p>
+    </div>
+    <div class="origins-grid rv" id="originsGrid"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     PAGE 3 — EXPERIENCE
+══════════════════════════════ -->
+<section class="sec atm-bg" id="atmosphere">
+  <div class="inn">
+    <div class="atm-grid">
+      <div class="rl">
+        <span class="ey">The Atmosphere</span>
+        <h2 class="h2">A Space Made for <em>Lingering</em></h2>
+        <div class="aline"></div>
+        <p style="color:var(--cream3);line-height:1.95;font-size:.9rem;margin-bottom:1rem">Our Pearl District space was designed by local architect James Okafor with one goal: to feel like the warmest, most beautiful living room in Portland. Exposed brick, 14-foot ceilings, natural wood, and the gentle hum of an espresso machine.</p>
+        <div class="atm-feats" id="atmFeats"></div>
+        <button class="btn-amber" onclick="document.getElementById('visit').scrollIntoView({behavior:'smooth'})">Plan Your Visit →</button>
+      </div>
+      <div class="rr">
+        <div class="atm-imgs">
+          <div class="atm-img-big"><img src="https://images.pexels.com/photos/2074122/pexels-photo-2074122.jpeg?auto=compress&cs=tinysrgb&w=800&h=300&fit=crop" alt="Cafe interior" loading="lazy"></div>
+          <div class="atm-img-sm"><img src="https://images.pexels.com/photos/894695/pexels-photo-894695.jpeg?auto=compress&cs=tinysrgb&w=400&h=200&fit=crop" alt="Coffee art" loading="lazy"></div>
+          <div class="atm-img-sm"><img src="https://images.pexels.com/photos/585753/pexels-photo-585753.jpeg?auto=compress&cs=tinysrgb&w=400&h=200&fit=crop" alt="Espresso" loading="lazy"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="sec gallery-bg" id="gallery">
+  <div class="inn">
+    <div class="rv" style="text-align:center;margin-bottom:3rem">
+      <span class="ey">Visual Journey</span>
+      <h2 class="h2">Life at <em>Velour</em></h2>
+      <div class="aline c"></div>
+    </div>
+    <div class="g-filter rv" id="gFilter"></div>
+    <div class="g-masonry rv" id="gGrid"></div>
+  </div>
+</section>
+
+<!-- MENU MODAL -->
+<div id="mModal">
+  <div class="mm-box" id="mmBox">
+    <button class="mm-close" onclick="cMM()">✕</button>
+    <img class="mm-img" id="mmImg" src="" alt="">
+    <div class="mm-body">
+      <span class="mm-tag" id="mmTag"></span>
+      <p class="mm-cat" id="mmCat"></p>
+      <h2 class="mm-name" id="mmName"></h2>
+      <p class="mm-desc" id="mmDesc"></p>
+      <div class="mm-metas" id="mmMetas"></div>
+      <div class="mm-price-row">
+        <span class="mm-price" id="mmPrice"></span>
+        <button class="btn-amber" style="padding:.7rem 2rem;font-size:.62rem">Order Now</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LANG BUTTON -->
+<button class="lang-btn" id="langBtn" onclick="toggleLang()">🌐 العربية</button>
+
+<!-- LIGHTBOX -->
+<div id="lb">
+  <button id="lbX" onclick="cLb()">✕</button>
+  <button id="lbP" onclick="lbMv(-1)">‹</button>
+  <img id="lbImg" src="" alt="">
+  <button id="lbN" onclick="lbMv(1)">›</button>
+  <span id="lbCap"></span>
+</div>
+
+<!-- ══════════════════════════════
+     PAGE 4 — OUR STORY
+══════════════════════════════ -->
+<section id="story" style="background:var(--bg2)">
+  <div style="padding:0">
+    <div class="story-hero rv">
+      <img src="https://images.pexels.com/photos/1251175/pexels-photo-1251175.jpeg?auto=compress&cs=tinysrgb&w=1600&h=600&fit=crop" alt="Velour story" loading="lazy">
+      <div class="story-hero-ov"><h2>Our <em>Story</em></h2></div>
+    </div>
+    <div class="sec" style="background:var(--bg2)">
+      <div class="inn">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:7rem;align-items:start" class="story-two-col">
+          <div class="rl">
+            <span class="ey">From Bean to Cup</span>
+            <h2 class="h2">A <em>Journey</em> of 15 Years</h2>
+            <div class="aline"></div>
+            <p style="color:var(--cream3);line-height:1.95;font-size:.9rem;margin-bottom:1.2rem">It started with a backpack, a one-way ticket to Addis Ababa, and an obsession with the coffee ceremony Maya Chen had witnessed as a child visiting her grandmother in Portland's Ethiopian community.</p>
+            <p style="color:var(--cream3);line-height:1.95;font-size:.9rem;margin-bottom:1.2rem">In 2009, she returned from two years of travelling through coffee-growing regions — Ethiopia, Colombia, Guatemala, Kyoto — with a notebook full of relationships, recipes, and a vision. Velour opened its doors on NW 23rd Avenue with a hand-me-down espresso machine and a line around the block.</p>
+            <p style="color:var(--cream3);line-height:1.95;font-size:.9rem">Today, we roast over 200 lbs of single-origin beans every week. Our walls are covered in letters from the farmers we work with. Every cup you drink here funds a child's education in the Yirgacheffe region of Ethiopia.</p>
+          </div>
+          <div class="rr">
+            <div class="timeline" id="timeline"></div>
+          </div>
+        </div>
+
+        <!-- TEAM -->
+        <div style="margin-top:7rem">
+          <div class="rv" style="text-align:center;margin-bottom:4rem">
+            <span class="ey">The People</span>
+            <h2 class="h2">Meet the <em>Team</em></h2>
+            <div class="aline c"></div>
+          </div>
+          <div class="team-grid rv" id="teamGrid"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════
+     PAGE 5 — VISIT US
+══════════════════════════════ -->
+<section class="sec visit-bg" id="visit">
+  <div class="inn">
+    <div class="rv" style="margin-bottom:4rem">
+      <span class="ey">Find Us</span>
+      <h2 class="h2">Come <em>Visit</em></h2>
+      <div class="aline"></div>
+    </div>
+    <div class="visit-grid">
+      <div class="rl">
+        <span class="ey">Opening Hours</span>
+        <h2 class="h2" style="font-size:2rem">We're Open <em>Daily</em></h2>
+        <div class="aline"></div>
+        <table class="hours-table" id="hoursTable"></table>
+        <div style="margin-top:2rem">
+          <button class="btn-amber" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Reserve a Table →</button>
+        </div>
+      </div>
+      <div class="rr">
+        <div class="map-box">
+          <div class="map-img" style="overflow:hidden">
+            <img src="https://images.pexels.com/photos/1134176/pexels-photo-1134176.jpeg?auto=compress&cs=tinysrgb&w=700&h=280&fit=crop" alt="Portland Pearl District" loading="lazy">
+          </div>
+          <div class="map-info">
+            <div class="loc-items" id="locItems"></div>
+            <a href="https://maps.google.com" target="_blank" rel="noopener" style="display:inline-block;margin-top:1.2rem;font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);border-bottom:1px solid var(--border);padding-bottom:2px">Open in Google Maps →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EVENTS -->
+    <div style="margin-top:7rem">
+      <div class="rv" style="text-align:center;margin-bottom:1rem">
+        <span class="ey">What's On</span>
+        <h2 class="h2">Upcoming <em>Events</em></h2>
+        <div class="aline c"></div>
+      </div>
+      <div class="events-grid rv" id="evGrid"></div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="sec rev-bg" id="reviews">
+  <div class="inn">
+    <div class="rv" style="text-align:center">
+      <span class="ey">What People Say</span>
+      <h2 class="h2">Guest <em>Reviews</em></h2>
+      <div class="aline c"></div>
+    </div>
+    <div class="rev-grid rv" id="revGrid"></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-sec">
+  <div class="cta-bg" style="background-image:url('https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=1600&h=600&fit=crop')"></div>
+  <div class="cta-in rv">
+    <h2 class="cta-h">Your Next Great Cup<br><em>Awaits You</em></h2>
+    <p class="cta-p">Join thousands of Portlanders who start every morning with Velour. Reserve your table or just walk in — you're always welcome.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <button class="btn-amber" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Reserve a Table</button>
+      <button class="btn-out" onclick="document.getElementById('menu').scrollIntoView({behavior:'smooth'})">View Menu</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     PAGE 6 — CONTACT
+══════════════════════════════ -->
+<section class="sec contact-bg" id="contact">
+  <div class="inn">
+    <div class="contact-grid">
+      <div class="rl">
+        <span class="ey">Get in Touch</span>
+        <h2 class="h2">We'd Love to <em>Hear From You</em></h2>
+        <div class="aline"></div>
+        <p class="sub" style="margin-bottom:2rem">Whether it's a reservation, a wholesale enquiry, an event booking, or just to say hello — our door (and inbox) is always open.</p>
+        <div class="loc-items" id="cInfo"></div>
+        <div style="display:flex;gap:.5rem;margin-top:2rem" id="cSocs"></div>
+      </div>
+      <div class="rr">
+        <div id="cForm">
+          <div class="f-row2">
+            <div class="fg"><label class="fl">First Name</label><input class="fi" id="cfn" placeholder="Maya"></div>
+            <div class="fg"><label class="fl">Last Name</label><input class="fi" id="cln" placeholder="Chen"></div>
+          </div>
+          <div class="fg"><label class="fl">Email</label><input class="fi" id="ceml" type="email" placeholder="maya@email.com"></div>
+          <div class="fg"><label class="fl">Phone</label><input class="fi" id="cph" placeholder="+1 503 000 0000"></div>
+          <div class="fg"><label class="fl">Subject</label>
+            <select class="fi" style="cursor:pointer">
+              <option>Table Reservation</option>
+              <option>Private Event Booking</option>
+              <option>Wholesale / B2B</option>
+              <option>Press Enquiry</option>
+              <option>General Question</option>
+            </select>
+          </div>
+          <div class="fg"><label class="fl">Message</label><textarea class="fi fta" id="cmsg" placeholder="Tell us how we can help…"></textarea></div>
+          <button class="fsub" onclick="sendForm()">Send Message</button>
+        </div>
+        <div class="f-ok" id="cOk">
+          <div style="font-size:2.5rem;color:var(--amber);margin-bottom:1rem">☕</div>
+          Thank you! We'll be in touch within 24 hours.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<div class="nl-bg">
+  <h2 class="nl-h">Join the Velour Community</h2>
+  <p class="nl-p">Monthly brew guides, origin stories, event invites and an exclusive 10% discount on your first online order.</p>
+  <div class="nl-form">
+    <input class="nl-input" id="nlEmail" placeholder="your@email.com" type="email">
+    <button class="nl-btn" onclick="nlSub()">Subscribe</button>
+  </div>
+  <p id="nlOk" style="display:none;margin-top:1rem;font-size:.85rem;color:var(--bg);opacity:.7">✓ Welcome to the family!</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft">
+    <div>
+      <div class="f-logo-wrap"><span style="font-size:1.3rem">☕</span><span class="f-logo-name">Velour Coffee</span></div>
+      <p class="f-desc">Portland's beloved artisan coffee house since 2009. Single-origin beans, roasted daily, poured with love.</p>
+      <div class="f-socs" id="fSocs"></div>
+    </div>
+    <div>
+      <p class="fc-t">Navigate</p>
+      <ul class="fc-ul">
+        <li><a href="#home">Home</a></li><li><a href="#menu">Menu</a></li>
+        <li><a href="#atmosphere">Experience</a></li><li><a href="#story">Our Story</a></li>
+        <li><a href="#visit">Visit Us</a></li><li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="fc-t">Our Coffees</p>
+      <ul class="fc-ul">
+        <li><a href="#">Ethiopian Yirgacheffe</a></li><li><a href="#">Colombian Huila</a></li>
+        <li><a href="#">Guatemala Antigua</a></li><li><a href="#">Kyoto Cold Brew</a></li>
+        <li><a href="#">Seasonal Blends</a></li><li><a href="#">Decaf Selection</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="fc-t">Visit</p>
+      <ul class="fc-ul">
+        <li><a href="#">2847 NW 23rd Ave</a></li>
+        <li><a href="#">Portland, OR 97210</a></li>
+        <li><a href="#">+1 503 224 8899</a></li>
+        <li><a href="#">hello@velourcoffee.com</a></li>
+        <li><a href="#">Mon–Fri 6am–9pm</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="fb">
+    <span>© 2026 Velour Coffee Co. All rights reserved.</span>
+    <span>Privacy Policy · Terms · Accessibility</span>
+  </div>
+</footer>
+
+<script>
+// PRELOADER
+window.addEventListener('load',()=>setTimeout(()=>document.getElementById('loader').classList.add('gone'),1400));
+
+// MARQUEE
+const mqItems=['Single Origin Beans','Roasted Daily','Portland Oregon','Award Winning Espresso','Organic Certified','Free WiFi','Open 7 Days','Est 2009'];
+const mqT=document.getElementById('mqt');
+const mqH=mqItems.map(t=>`<span>${t}</span><span class="sep">✦</span>`).join('');
+mqT.innerHTML=mqH+mqH;
+
+// SCROLL
+window.addEventListener('scroll',()=>{
+  const p=scrollY/(document.body.scrollHeight-innerHeight)*100;
+  document.getElementById('prog').style.width=p+'%';
+  document.getElementById('btt').classList.toggle('show',scrollY>600);
+  document.getElementById('hdr').classList.toggle('sc',scrollY>80);
+});
+
+// MOB NAV
+document.getElementById('ham').addEventListener('click',()=>document.getElementById('mob').classList.add('open'));
+document.getElementById('mobX').addEventListener('click',cMob);
+function cMob(){document.getElementById('mob').classList.remove('open')}
+
+// HERO SLIDER
+let hi=0;
+const slides=document.querySelectorAll('.slide');
+const dotsW=document.getElementById('hDots');
+slides.forEach((_,i)=>{
+  const d=document.createElement('div');d.className='hd'+(i===0?' on':'');
+  d.onclick=()=>goSl(i);dotsW.appendChild(d);
+});
+function goSl(n){
+  slides[hi].classList.remove('on');document.querySelectorAll('.hd')[hi].classList.remove('on');
+  hi=(n+slides.length)%slides.length;
+  slides[hi].classList.add('on');document.querySelectorAll('.hd')[hi].classList.add('on');
+}
+setInterval(()=>goSl(hi+1),8000);
+
+// INTRO STRIP
+const INTRO=[
+  {i:'🌱',n:'Single Origin',d:'Direct trade with 8 farms across 5 countries'},
+  {i:'🔥',n:'Roasted Daily',d:'Fresh every morning before 6am'},
+  {i:'☕',n:'Artisan Craft',d:'Every cup hand-poured to order'},
+  {i:'🏡',n:'Community First',d:'A living room for 4,800+ regulars'},
+];
+document.getElementById('introGrid').innerHTML=INTRO.map(x=>`
+<div class="intro-item"><div class="ii-ic">${x.i}</div><p class="ii-name">${x.n}</p><p class="ii-desc">${x.d}</p></div>`).join('');
+
+// COUNTERS
+let counted=false;
+function runCounters(){
+  if(counted)return;counted=true;
+  document.querySelectorAll('[data-count]').forEach(el=>{
+    const tgt=+el.dataset.count,dur=2200,s=performance.now();
+    (function f(now){
+      const p=Math.min((now-s)/dur,1),e=1-Math.pow(1-p,3);
+      const suffix=(tgt>=100)?'+':(tgt===8||tgt===15||tgt===12)?'':'';
+      el.textContent=Math.round(e*tgt)+suffix;
+      if(p<1)requestAnimationFrame(f);
+    })(performance.now());
+  });
+}
+
+// MENU — 30+ items
+const MENUS=[
+  {tab:'Espresso Bar',items:[
+    {tag:'Signature',cat:'Hot Coffee',name:'Velour Signature Latte',desc:'Our house espresso with steamed oat milk, vanilla bean and a dusting of cinnamon. The drink that built Velour.',price:'$7.50',img:'https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'210 kcal',time:'4 min',vegan:'Vegan option'},
+    {tag:null,cat:'Hot Coffee',name:'Ethiopian Pour Over',desc:'Single-origin Yirgacheffe, hand-poured to order. Bright, floral, blueberry-forward. Best without milk.',price:'$6.00',img:'https://images.pexels.com/photos/894695/pexels-photo-894695.jpeg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'5 kcal',time:'6 min',vegan:'Vegan'},
+    {tag:'New',cat:'Cold',name:'Kyoto Cold Brew',desc:'18-hour cold extraction of our Japanese single-origin. Smooth, low-acid, with a finish of dark chocolate.',price:'$7.00',img:'https://images.pexels.com/photos/585753/pexels-photo-585753.jpeg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'10 kcal',time:'Ready made',vegan:'Vegan'},
+    {tag:null,cat:'Hot Coffee',name:'Flat White',desc:'Double ristretto shot with microfoamed whole milk, pulled tight and silky. The Australian way.',price:'$5.50',img:'https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'150 kcal',time:'3 min',vegan:'Oat option'},
+    {tag:null,cat:'Hot Coffee',name:'Cortado',desc:'Equal parts espresso and warm milk. No foam, no fuss. For the purists who know what they want.',price:'$5.00',img:'https://images.pexels.com/photos/894695/pexels-photo-894695.jpeg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'80 kcal',time:'3 min',vegan:'Oat option'},
+    {tag:null,cat:'Cold',name:'Iced Caramel Latte',desc:'Double espresso over ice with cold oat milk and house-made salted caramel. Sweet, bold, refreshing.',price:'$7.50',img:'https://images.pexels.com/photos/585753/pexels-photo-585753.jpeg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'240 kcal',time:'4 min',vegan:'Vegan'},
+    {tag:'Popular',cat:'Hot Coffee',name:'Spiced Oat Cappuccino',desc:'Our twist on a classic. Double shot with steamed oat milk, house chai spice and a dusting of nutmeg.',price:'$7.00',img:'https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'190 kcal',time:'4 min',vegan:'Vegan'},
+    {tag:null,cat:'Hot Coffee',name:'Americano',desc:'Double espresso diluted with hot water to your preference. Clean, direct, unapologetic.',price:'$4.50',img:'https://images.pexels.com/photos/894695/pexels-photo-894695.jpeg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'10 kcal',time:'2 min',vegan:'Vegan'},
+    {tag:null,cat:'Cold',name:'Nitro Cold Brew',desc:'Cold brew infused with nitrogen gas, poured on tap. Silky, creamy head with no milk needed.',price:'$7.50',img:'https://images.pexels.com/photos/585753/pexels-photo-585753.jpeg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'15 kcal',time:'Ready made',vegan:'Vegan'},
+    {tag:null,cat:'Non-Coffee',name:'Matcha Oat Latte',desc:'Ceremonial-grade Japanese matcha whisked with steamed oat milk. Earthy, creamy and deeply calming.',price:'$6.50',img:'https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'130 kcal',time:'4 min',vegan:'Vegan'},
+    {tag:null,cat:'Non-Coffee',name:'Golden Turmeric Latte',desc:'Steamed oat milk with turmeric, ginger, cinnamon and a touch of black pepper. Anti-inflammatory gold.',price:'$6.00',img:'https://images.pexels.com/photos/894695/pexels-photo-894695.jpeg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'110 kcal',time:'4 min',vegan:'Vegan'},
+  ]},
+  {tab:'Food & Pastries',items:[
+    {tag:'Chef Special',cat:'Breakfast',name:'Avocado Toast with Dukkah',desc:'Sourdough from local bakery Ken\'s Artisan, smashed avocado, dukkah, pickled chilli and a soft-poached egg.',price:'$14.00',img:'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'420 kcal',time:'8 min',vegan:'Vegan w/o egg'},
+    {tag:null,cat:'Pastry',name:'Almond Croissant',desc:'Twice-baked croissant with almond cream, toasted almonds and powdered sugar. Baked fresh every morning.',price:'$6.50',img:'https://images.pexels.com/photos/2135/food-france-morning-breakfast.jpg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'380 kcal',time:'Ready',vegan:'Vegetarian'},
+    {tag:null,cat:'Lunch',name:'Mushroom & Gruyère Quiche',desc:'House-made pastry crust, wild mushrooms, caramelised onion and Gruyère. Served warm with a simple green salad.',price:'$15.00',img:'https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'520 kcal',time:'10 min',vegan:'Vegetarian'},
+    {tag:'New',cat:'Breakfast',name:'Ricotta Hotcakes',desc:'Three fluffy ricotta pancakes with seasonal berries, whipped cream and a drizzle of Portland wildflower honey.',price:'$16.00',img:'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'590 kcal',time:'12 min',vegan:'Vegetarian'},
+    {tag:null,cat:'Pastry',name:'Pain au Chocolat',desc:'Classic French butter pastry with two thick bars of Valrhona dark chocolate. The proper way.',price:'$5.50',img:'https://images.pexels.com/photos/2135/food-france-morning-breakfast.jpg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'340 kcal',time:'Ready',vegan:'Vegetarian'},
+    {tag:'Popular',cat:'Lunch',name:'Velour Club Sandwich',desc:'Triple-decker with roast chicken, bacon, avocado, tomato, lettuce and chipotle mayo on sourdough. Served with fries.',price:'$18.00',img:'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'780 kcal',time:'12 min',vegan:'No'},
+    {tag:null,cat:'Breakfast',name:'Granola & Coconut Yoghurt',desc:'House-made toasted granola with coconut yoghurt, seasonal fruit compote and micro herbs.',price:'$12.00',img:'https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'310 kcal',time:'Ready',vegan:'Vegan'},
+    {tag:null,cat:'Pastry',name:'Cardamom Morning Bun',desc:'Laminated dough rolled in cardamom sugar, twisted and baked fresh. Citrus zest orange glaze.',price:'$5.00',img:'https://images.pexels.com/photos/2135/food-france-morning-breakfast.jpg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'290 kcal',time:'Ready',vegan:'Vegetarian'},
+    {tag:null,cat:'Lunch',name:'Roasted Tomato Soup',desc:'Slow-roasted heritage tomatoes with basil oil and parmesan croutons. Served with sourdough.',price:'$11.00',img:'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'280 kcal',time:'8 min',vegan:'Vegan w/o crouton'},
+    {tag:null,cat:'Sweet',name:'Chocolate Lava Cake',desc:'Warm dark chocolate fondant with a liquid centre. Served with vanilla bean ice cream and salted caramel.',price:'$10.00',img:'https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'460 kcal',time:'10 min',vegan:'No'},
+  ]},
+  {tab:'Retail & Beans',items:[
+    {tag:'Best Seller',cat:'Whole Bean 250g',name:'Yirgacheffe Natural',desc:'Notes of blueberry, jasmine and dark honey. Our most requested single-origin, direct from Kochere Cooperative, Ethiopia.',price:'$22.00',img:'https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'—',time:'Ships in 2 days',vegan:'Specialty Grade'},
+    {tag:null,cat:'Whole Bean 250g',name:'Colombian Huila',desc:'Classic caramel sweetness, red apple acidity, smooth milk chocolate finish. Perfect for espresso.',price:'$20.00',img:'https://images.pexels.com/photos/421759/pexels-photo-421759.jpeg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'—',time:'Ships in 2 days',vegan:'Specialty Grade'},
+    {tag:null,cat:'Brewing Kit',name:'V60 Starter Bundle',desc:'Hario V60 dripper, 40 filters, 100g of Yirgacheffe and a brew guide card. The perfect gift for a coffee lover.',price:'$48.00',img:'https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'—',time:'Ships in 3 days',vegan:'Gift Wrapped'},
+    {tag:'New',cat:'Whole Bean 250g',name:'Guatemala Antigua Washed',desc:'Brown sugar sweetness, peach brightness and almond finish. A crowd-pleaser at 1,500m altitude.',price:'$21.00',img:'https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'—',time:'Ships in 2 days',vegan:'Specialty Grade'},
+    {tag:null,cat:'Subscription',name:'Monthly Bean Box',desc:'2×250g bags of rotating single-origins each month, with a tasting card and brew notes from Maya.',price:'$38/mo',img:'https://images.pexels.com/photos/421759/pexels-photo-421759.jpeg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'—',time:'Monthly delivery',vegan:'Cancel anytime'},
+    {tag:'Popular',cat:'Merch',name:'Velour Ceramic Mug',desc:'Hand-thrown ceramic mug in speckled dark clay with the Velour mark. 350ml. Dishwasher safe.',price:'$32.00',img:'https://images.pexels.com/photos/2074122/pexels-photo-2074122.jpeg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'—',time:'In stock',vegan:'Made in Portland'},
+    {tag:null,cat:'Brewing Kit',name:'AeroPress + Coffee Bundle',desc:'AeroPress brewer with 350 filters, 100g Colombian Huila and step-by-step recipe card.',price:'$55.00',img:'https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'—',time:'Ships in 3 days',vegan:'Gift Wrapped'},
+    {tag:null,cat:'Merch',name:'Velour Canvas Tote',desc:'Natural canvas tote with hand-screenprinted Velour logo. Strong, minimal, reusable.',price:'$18.00',img:'https://images.pexels.com/photos/2074122/pexels-photo-2074122.jpeg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'—',time:'In stock',vegan:'Eco-friendly'},
+    {tag:null,cat:'Whole Bean 500g',name:'Espresso House Blend',desc:'Our daily espresso blend — equal parts Ethiopian and Colombian, roasted medium-dark for a balanced, sweet shot.',price:'$36.00',img:'https://images.pexels.com/photos/421759/pexels-photo-421759.jpeg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'—',time:'Ships in 2 days',vegan:'Specialty Grade'},
+    {tag:null,cat:'Brewing Kit',name:'Chemex 6-Cup Bundle',desc:'Classic Chemex with 100 filters and 250g Yirgacheffe. The most beautiful way to brew at home.',price:'$68.00',img:'https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=600&h=440&fit=crop',cal:'—',time:'Ships in 3 days',vegan:'Gift Wrapped'},
+  ]},
+];
+document.getElementById('mTabs').innerHTML=MENUS.map((m,i)=>`<button class="mtab${i===0?' on':''}" onclick="showMenu(${i},this)">${m.tab}</button>`).join('');
+document.getElementById('mPanes').innerHTML=MENUS.map((m,i)=>`
+<div class="menu-pane rv${i===0?' on':''}">
+${m.items.map((it,j)=>`
+<div class="mc" onclick="openMM(${i},${j})">
+  <div class="mc-img" style="position:relative">
+    ${it.tag?`<div class="mc-tag">${it.tag}</div>`:''}
+    <img src="${it.img}" alt="${it.name}" loading="lazy">
+  </div>
+  <div class="mc-body">
+    <p class="mc-cat">${it.cat}</p>
+    <h3 class="mc-name">${it.name}</h3>
+    <p class="mc-desc">${it.desc}</p>
+    <div class="mc-foot"><span class="mc-price">${it.price}</span><span class="mc-add">View Details →</span></div>
+  </div>
+</div>`).join('')}
+</div>`).join('');
+function showMenu(i,btn){
+  document.querySelectorAll('.mtab').forEach(t=>t.classList.remove('on'));
+  document.querySelectorAll('.menu-pane').forEach(p=>p.classList.remove('on'));
+  btn.classList.add('on');document.querySelectorAll('.menu-pane')[i].classList.add('on');
+}
+function openMM(tabIdx,itemIdx){
+  const it=MENUS[tabIdx].items[itemIdx];
+  document.getElementById('mmImg').src=it.img;
+  document.getElementById('mmImg').alt=it.name;
+  document.getElementById('mmTag').textContent=it.tag||'';
+  document.getElementById('mmTag').style.display=it.tag?'inline-block':'none';
+  document.getElementById('mmCat').textContent=it.cat;
+  document.getElementById('mmName').textContent=it.name;
+  document.getElementById('mmDesc').textContent=it.desc;
+  document.getElementById('mmPrice').textContent=it.price;
+  document.getElementById('mmMetas').innerHTML=[
+    {l:'Calories',v:it.cal},
+    {l:'Prep Time',v:it.time},
+    {l:'Dietary',v:it.vegan},
+  ].map(m=>`<div class="mm-meta"><strong>${m.l}</strong>${m.v}</div>`).join('');
+  document.getElementById('mModal').classList.add('on');
+  document.body.style.overflow='hidden';
+}
+function cMM(){
+  document.getElementById('mModal').classList.remove('on');
+  document.body.style.overflow='';
+}
+document.getElementById('mModal').addEventListener('click',e=>{if(e.target.id==='mModal')cMM();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.getElementById('mModal').classList.contains('on'))cMM();});
+
+// ORIGINS
+document.getElementById('originsGrid').innerHTML=[
+  {flag:'🇪🇹',country:'Ethiopia',alt:'Yirgacheffe · 1,800m',desc:'The birthplace of coffee. Our Yirgacheffe beans carry notes of blueberry, jasmine and dark honey from ancient heirloom varietals.',img:'https://images.pexels.com/photos/1134176/pexels-photo-1134176.jpeg?auto=compress&cs=tinysrgb&w=500&h=700&fit=crop'},
+  {flag:'🇨🇴',country:'Colombia',alt:'Huila · 1,600m',desc:'High-altitude Huila beans deliver the classic Colombian cup — caramel sweetness, red apple brightness and silky milk chocolate.',img:'https://images.pexels.com/photos/421759/pexels-photo-421759.jpeg?auto=compress&cs=tinysrgb&w=500&h=700&fit=crop'},
+  {flag:'🇯🇵',country:'Japan',alt:'Kyoto · Cold Brew',desc:'Not a growing region, but a method. Our Kyoto-style slow cold brew takes 18 hours and produces a glass of extraordinary clarity.',img:'https://images.pexels.com/photos/1440727/pexels-photo-1440727.jpeg?auto=compress&cs=tinysrgb&w=500&h=700&fit=crop'},
+].map(o=>`
+<div class="origin-card">
+  <img src="${o.img}" alt="${o.country}" loading="lazy">
+  <div class="origin-ov">
+    <div class="origin-flag">${o.flag}</div>
+    <p class="origin-country">${o.country}</p>
+    <p class="origin-alt">${o.alt}</p>
+    <p class="origin-desc">${o.desc}</p>
+  </div>
+</div>`).join('');
+
+// ATMOSPHERE FEATURES
+document.getElementById('atmFeats').innerHTML=[
+  {i:'🪑',t:'Seating for 60',d:'Intimate corner nooks, communal tables and window seats'},
+  {i:'📶',t:'Gigabit WiFi — Free',d:'Work-friendly with plenty of power outlets at every seat'},
+  {i:'🎵',t:'Live Music Fridays',d:'Local acoustic artists every Friday evening from 7pm'},
+  {i:'🐾',t:'Dog Friendly',d:'Our courtyard is fully dog-friendly — water bowls provided'},
+].map(f=>`
+<div class="atf"><span class="atf-ic">${f.i}</span><div><p class="atf-t">${f.t}</p><p class="atf-d">${f.d}</p></div></div>`).join('');
+
+// GALLERY
+const GCATS=['All','Drinks','Food','Cafe','Behind the Scenes'];
+document.getElementById('gFilter').innerHTML=GCATS.map((c,i)=>`<button class="gfb${i===0?' on':''}" onclick="fG('${c}',this)">${c}</button>`).join('');
+const GTILES=[
+  {img:'https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Velour Signature Latte',cat:'Drinks'},
+  {img:'https://images.pexels.com/photos/894695/pexels-photo-894695.jpeg?auto=compress&cs=tinysrgb&w=600&h=800&fit=crop',lbl:'Ethiopian Pour Over',cat:'Drinks'},
+  {img:'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600&h=500&fit=crop',lbl:'Avocado Toast',cat:'Food'},
+  {img:'https://images.pexels.com/photos/2074122/pexels-photo-2074122.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Pearl District Cafe',cat:'Cafe'},
+  {img:'https://images.pexels.com/photos/585753/pexels-photo-585753.jpeg?auto=compress&cs=tinysrgb&w=600&h=500&fit=crop',lbl:'Espresso Pull',cat:'Behind the Scenes'},
+  {img:'https://images.pexels.com/photos/1251175/pexels-photo-1251175.jpeg?auto=compress&cs=tinysrgb&w=600&h=750&fit=crop',lbl:'Barista at Work',cat:'Behind the Scenes'},
+  {img:'https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=600&h=550&fit=crop',lbl:'Coffee Beans',cat:'Behind the Scenes'},
+  {img:'https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Mushroom Quiche',cat:'Food'},
+  {img:'https://images.pexels.com/photos/421759/pexels-photo-421759.jpeg?auto=compress&cs=tinysrgb&w=600&h=800&fit=crop',lbl:'Colombian Farm',cat:'Behind the Scenes'},
+  {img:'https://images.pexels.com/photos/1440727/pexels-photo-1440727.jpeg?auto=compress&cs=tinysrgb&w=600&h=550&fit=crop',lbl:'Kyoto Cold Brew',cat:'Drinks'},
+  {img:'https://images.pexels.com/photos/1134176/pexels-photo-1134176.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Ethiopian Landscape',cat:'Behind the Scenes'},
+  {img:'https://images.pexels.com/photos/2135/food-france-morning-breakfast.jpg?auto=compress&cs=tinysrgb&w=600&h=550&fit=crop',lbl:'Almond Croissant',cat:'Food'},
+  {img:'https://images.pexels.com/photos/3028274/pexels-photo-3028274.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',lbl:'Morning Ritual',cat:'Cafe'},
+  {img:'https://images.pexels.com/photos/4350057/pexels-photo-4350057.jpeg?auto=compress&cs=tinysrgb&w=600&h=750&fit=crop',lbl:'Latte Art Close-Up',cat:'Drinks'},
+];
+let lbArr=[],lbIdx=0;
+function renderG(f){
+  const tiles=f==='All'?GTILES:GTILES.filter(t=>t.cat===f);
+  lbArr=tiles;
+  document.getElementById('gGrid').innerHTML=tiles.map((t,i)=>`
+<div class="g-tile" onclick="oLb(${i})">
+  <img src="${t.img}" alt="${t.lbl}" loading="lazy">
+  <div class="g-ov"><p class="g-ov-t">${t.lbl}</p><p class="g-ov-c">${t.cat}</p></div>
+</div>`).join('');
+}
+renderG('All');
+function fG(v,btn){document.querySelectorAll('.gfb').forEach(b=>b.classList.remove('on'));btn.classList.add('on');renderG(v)}
+function oLb(i){lbIdx=i;document.getElementById('lbImg').src=lbArr[i].img;document.getElementById('lbCap').textContent=lbArr[i].lbl;document.getElementById('lb').classList.add('on')}
+function cLb(){document.getElementById('lb').classList.remove('on')}
+function lbMv(d){lbIdx=(lbIdx+d+lbArr.length)%lbArr.length;oLb(lbIdx)}
+document.getElementById('lb').addEventListener('click',e=>{if(e.target.id==='lb')cLb()});
+document.addEventListener('keydown',e=>{
+  if(!document.getElementById('lb').classList.contains('on'))return;
+  if(e.key==='Escape')cLb();
+  if(e.key==='ArrowLeft')lbMv(-1);
+  if(e.key==='ArrowRight')lbMv(1);
+});
+
+// TIMELINE
+document.getElementById('timeline').innerHTML=[
+  {y:'2007',t:'The Seed is Planted',d:'Maya travels to Yirgacheffe, Ethiopia and witnesses her first traditional coffee ceremony. The obsession begins.'},
+  {y:'2009',t:'Velour Opens its Doors',d:'A 400 sq ft space on NW 23rd with a hand-me-down La Marzocco and a line around the block on day one.'},
+  {y:'2012',t:'In-House Roastery',d:'We install our own Probat roaster and begin roasting every batch ourselves — the city notices immediately.'},
+  {y:'2016',t:'Best Coffee, Portland Monthly',d:'Named Portland\'s best coffee shop for the first time. We hang the award in the bathroom as a reminder to stay humble.'},
+  {y:'2021',t:'Direct Trade Partnerships',d:'We cut out all middlemen and begin flying to farms directly — 8 partnerships across 5 countries now fund education programs.'},
+  {y:'2024',t:'Forbes 5-Star & Expansion',d:'Forbes Travel names us one of America\'s top 10 independent coffee destinations. We open our second space in NE Portland.'},
+].map(tl=>`
+<div class="tl-item">
+  <div class="tl-dot"></div>
+  <p class="tl-year">${tl.y}</p>
+  <h3 class="tl-title">${tl.t}</h3>
+  <p class="tl-desc">${tl.d}</p>
+</div>`).join('');
+
+// TEAM — unique images, not reused elsewhere
+document.getElementById('teamGrid').innerHTML=[
+  {img:'https://images.pexels.com/photos/3184405/pexels-photo-3184405.jpeg?auto=compress&cs=tinysrgb&w=400&h=550&fit=crop',name:'Maya Chen',role:'Founder & Head Roaster',bio:'Former tech entrepreneur who quit Silicon Valley to follow coffee around the world. 15 years of obsession.'},
+  {img:'https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=400&h=550&fit=crop',name:'James Okafor',role:'Head Barista',bio:'World Barista Championship 2022 finalist. His latte art has been featured in Bon Appétit magazine.'},
+  {img:'https://images.pexels.com/photos/3184317/pexels-photo-3184317.jpeg?auto=compress&cs=tinysrgb&w=400&h=550&fit=crop',name:'Sofia Ramos',role:'Executive Chef',bio:'Trained at Le Cordon Bleu Paris. Believes great food and great coffee are inseparable.'},
+  {img:'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400&h=550&fit=crop',name:'Liam Park',role:'Operations Director',bio:'Keeps everything running so Maya can keep obsessing over beans. The quiet genius behind the curtain.'},
+].map(tm=>`
+<div class="team-card">
+  <div class="team-img"><img src="${tm.img}" alt="${tm.name}" loading="lazy"></div>
+  <p class="team-name">${tm.name}</p>
+  <p class="team-role">${tm.role}</p>
+  <p class="team-bio">${tm.bio}</p>
+</div>`).join('');
+
+// fix story grid on mobile
+const sg=document.querySelector('.story-two-col');
+if(window.innerWidth<768)sg.style.gridTemplateColumns='1fr';
+window.addEventListener('resize',()=>{if(window.innerWidth<768)sg.style.gridTemplateColumns='1fr';else sg.style.gridTemplateColumns='1fr 1fr'});
+
+// HOURS
+const days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+const hrs=['6:00am – 9:00pm','6:00am – 9:00pm','6:00am – 9:00pm','6:00am – 9:00pm','6:00am – 10:00pm','7:00am – 10:00pm','8:00am – 8:00pm'];
+const todayIdx=new Date().getDay()===0?6:new Date().getDay()-1;
+document.getElementById('hoursTable').innerHTML=days.map((d,i)=>{
+  const cls=i===todayIdx?' class="today"':'';
+  const lbl=i===todayIdx?' <strong>(Today)</strong>':'';
+  return `<tr${cls}><td>${d}${lbl}</td><td>${hrs[i]}</td></tr>`;
+}).join('');
+
+// EVENTS
+document.getElementById('evGrid').innerHTML=[
+  {img:'https://images.pexels.com/photos/1251175/pexels-photo-1251175.jpeg?auto=compress&cs=tinysrgb&w=600&h=340&fit=crop',date:'Every Friday · 7:00pm',name:'Live Acoustic Sessions',desc:'Local Portland musicians perform intimate acoustic sets in our main space. Free entry, great coffee.'},
+  {img:'https://images.pexels.com/photos/894695/pexels-photo-894695.jpeg?auto=compress&cs=tinysrgb&w=600&h=340&fit=crop',date:'Last Saturday of Month',name:'Latte Art Workshop',desc:'James leads a 2-hour hands-on workshop. Limited to 12 participants. Includes espresso, milk and a lot of laughs.'},
+  {img:'https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&w=600&h=340&fit=crop',date:'Every Thursday · 6:30pm',name:'Coffee Origin Tasting',desc:'Three single-origins, side by side. Learn to taste the difference between Ethiopia, Colombia and Guatemala.'},
+].map(ev=>`
+<div class="ev-card">
+  <div class="ev-img"><img src="${ev.img}" alt="${ev.name}" loading="lazy"></div>
+  <div class="ev-body"><p class="ev-date">${ev.date}</p><h3 class="ev-name">${ev.name}</h3><p class="ev-desc">${ev.desc}</p></div>
+</div>`).join('');
+
+// REVIEWS — 6 reviews, all unique avatars
+document.getElementById('revGrid').innerHTML=[
+  {stars:5,text:'I\'ve been to coffee shops in Tokyo, Melbourne and Milan — Velour holds its own against the very best. The Ethiopian pour-over is extraordinary.',name:'James Thornton',src:'Google · 5 Stars',img:'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&fit=crop'},
+  {stars:5,text:'My office is here three days a week. The WiFi is fast, the music is perfect, and no one has ever asked me to leave after my third flat white. This place gets it.',name:'Priya Nair',src:'Yelp · Elite Review',img:'https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&fit=crop'},
+  {stars:5,text:'The almond croissant and the Kyoto cold brew changed my life. I wish I was exaggerating. Maya and her team have built something truly special in Portland.',name:'David Kowalski',src:'TripAdvisor · Top Review',img:'https://images.pexels.com/photos/614810/pexels-photo-614810.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&fit=crop'},
+  {stars:5,text:'We held our entire company retreat here — 24 people, all day. The team was incredible, the food never stopped, and every single person left obsessed with the beans.',name:'Sarah Mitchell',src:'Google · Verified Review',img:'https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&fit=crop'},
+  {stars:5,text:'As a coffee professional, I rarely get moved. The Colombian Huila espresso here had me standing at the bar asking questions for 20 minutes. These people are serious.',name:'Omar Al-Rashid',src:'Specialty Coffee Association · Member',img:'https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&fit=crop'},
+  {stars:5,text:'I visited Portland just to check this place off my list. The latte art workshop on Saturday changed how I think about milk and foam. James is a true artist.',name:'Yuki Tanaka',src:'Instagram · @yukidrinks',img:'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&fit=crop'},
+].map(r=>`
+<div class="rev-card">
+  <span class="rev-qs">"</span>
+  <div class="rev-stars">${'★'.repeat(r.stars)}</div>
+  <p class="rev-text">"${r.text}"</p>
+  <div class="rev-auth"><div class="rev-av"><img src="${r.img}" alt="${r.name}" loading="lazy"></div><div><p class="rev-name">${r.name}</p><p class="rev-src">${r.src}</p></div></div>
+</div>`).join('');
+
+// LOCATION
+document.getElementById('locItems').innerHTML=[
+  {i:'📍',l:'Address',v:'2847 NW 23rd Avenue, Pearl District, Portland OR 97210'},
+  {i:'🚇',l:'Transit',v:'TriMet Bus 15 · NW 23rd & Lovejoy stop'},
+  {i:'🅿️',l:'Parking',v:'Free 2-hour street parking on NW 23rd'},
+].map(l=>`<div class="loc-item"><div class="loc-ic">${l.i}</div><div><p class="loc-lbl">${l.l}</p><p class="loc-val">${l.v}</p></div></div>`).join('');
+
+document.getElementById('cInfo').innerHTML=[
+  {i:'📍',l:'Address',v:'2847 NW 23rd Ave, Portland OR 97210'},
+  {i:'📞',l:'Phone',v:'+1 503 224 8899'},
+  {i:'📧',l:'Email',v:'hello@velourcoffee.com'},
+  {i:'🕐',l:'Hours',v:'Mon–Fri 6am–9pm · Sat 7am–10pm · Sun 8am–8pm'},
+].map(c=>`<div class="loc-item"><div class="loc-ic">${c.i}</div><div><p class="loc-lbl">${c.l}</p><p class="loc-val">${c.v}</p></div></div>`).join('');
+
+document.getElementById('cSocs').innerHTML=['📸','f','𝕏','🎵','🔗'].map(s=>`<a href="#" style="width:38px;height:38px;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--cream3);transition:.2s" onmouseover="this.style.borderColor='var(--amber)';this.style.color='var(--amber)'" onmouseout="this.style.borderColor='';this.style.color=''">${s}</a>`).join('');
+document.getElementById('fSocs').innerHTML=['📸','f','𝕏','🎵'].map(s=>`<a href="#" style="width:34px;height:34px;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:.78rem;color:var(--cream3);transition:.2s" onmouseover="this.style.borderColor='var(--amber)';this.style.color='var(--amber)'" onmouseout="this.style.borderColor='';this.style.color=''">${s}</a>`).join('');
+
+// CONTACT
+function sendForm(){
+  if(!document.getElementById('ceml').value.trim()){alert('Please enter your email.');return;}
+  document.getElementById('cForm').style.display='none';
+  document.getElementById('cOk').style.display='block';
+}
+
+// NEWSLETTER
+function nlSub(){
+  const e=document.getElementById('nlEmail').value.trim();
+  if(!e){alert('Please enter your email.');return;}
+  document.getElementById('nlOk').style.display='block';
+  document.getElementById('nlEmail').value='';
+}
+
+// SCROLL REVEAL
+const obs=new IntersectionObserver(es=>es.forEach(e=>{
+  if(e.isIntersecting){e.target.classList.add('vis');if(e.target.closest('.stats-bg'))runCounters();}
+}),{threshold:.07});
+document.querySelectorAll('.rv,.rl,.rr').forEach(el=>obs.observe(el));
+
+// ARABIC LANGUAGE TOGGLE
+const AR={
+  'Artisan Coffee · Portland, Oregon':'قهوة حرفية · بورتلاند، أوريغون',
+  'Every Sip':'كل رشفة',
+  'Tells a Story':'تحكي قصة',
+  'Explore Our Menu':'استكشف قائمتنا',
+  'Our Story':'قصتنا',
+  'Home':'الرئيسية','Menu':'القائمة','Experience':'التجربة',
+  'Visit Us':'زورونا','Contact':'تواصل معنا',
+  'Reserve a Table':'احجز طاولة',
+  'Our Menu':'قائمتنا',
+  'Crafted with':'صُنعت بـ',
+  'Passion':'شغف',
+  'Guest':'تقييمات',
+  'Reviews':'الضيوف',
+  'What People Say':'ماذا يقول الناس',
+  'Get in Touch':'تواصل معنا',
+  'Find Us':'ابحث عنا',
+  'Come':'تفضل',
+  'Visit':'بزيارتنا',
+  'Opening Hours':'ساعات العمل',
+  'Portland\'s beloved artisan coffee house since 2009. Single-origin beans, roasted daily, poured with love.':'بيت القهوة الحرفي المحبوب في بورتلاند منذ عام 2009. حبوب أحادية المصدر، تُحمّص يومياً، وتُصبّ بحب.',
+};
+let isAR=false;
+function toggleLang(){
+  isAR=!isAR;
+  const html=document.documentElement;
+  const btn=document.getElementById('langBtn');
+  if(isAR){
+    html.setAttribute('dir','rtl');
+    html.setAttribute('lang','ar');
+    document.head.insertAdjacentHTML('beforeend','<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@300;400;500;600&display=swap" id="arFont">');
+    document.body.style.fontFamily="'Noto Sans Arabic', sans-serif";
+    btn.textContent='🌐 English';
+    document.querySelector('.h-eye').textContent='قهوة حرفية · بورتلاند، أوريغون';
+    document.querySelector('.h-h1').innerHTML='كل رشفة<em>تحكي قصة</em>';
+    document.querySelector('.h-p').textContent='مُصدَّرة بعناية. محمّصة بدقة. مصبوبة بشغف منذ عام 2009. مرحباً بكم في أجمل ملاذ للقهوة في بورتلاند.';
+    document.querySelector('.nav-cta').textContent='احجز طاولة';
+    document.querySelectorAll('nav a').forEach((a,i)=>a.textContent=['الرئيسية','القائمة','التجربة','قصتنا','زورونا','تواصل'][i]||a.textContent);
+    document.querySelector('.logo-text small').textContent='بورتلاند، أوريغون · منذ 2009';
+  } else {
+    html.setAttribute('dir','ltr');
+    html.setAttribute('lang','en');
+    const af=document.getElementById('arFont');if(af)af.remove();
+    document.body.style.fontFamily='';
+    btn.textContent='🌐 العربية';
+    document.querySelector('.h-eye').textContent='Artisan Coffee · Portland, Oregon';
+    document.querySelector('.h-h1').innerHTML='Every Sip<em>Tells a Story</em>';
+    document.querySelector('.h-p').textContent='Carefully sourced. Meticulously roasted. Poured with passion since 2009. Welcome to Portland\'s most beloved coffee sanctuary.';
+    document.querySelector('.nav-cta').textContent='Reserve a Table';
+    document.querySelectorAll('nav a').forEach((a,i)=>a.textContent=['Home','Menu','Experience','Our Story','Visit Us','Contact'][i]||a.textContent);
+    document.querySelector('.logo-text small').textContent='Portland, Oregon · Est. 2009';
+  }
+}
+</script>
+</body>
+</html>
+
+</body></html>
